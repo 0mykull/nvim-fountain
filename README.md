@@ -53,7 +53,7 @@ return {
       },
       -- Export configuration
       export = {
-        pdf = { options = "--overwrite --font Courier" },
+        pdf = { options = "--overwrite --fonts Courier" },
       },
     })
   end,
