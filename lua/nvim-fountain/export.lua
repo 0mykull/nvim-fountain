@@ -53,42 +53,4 @@ function M.export_pdf(output_path)
 	end
 end
 
--- Preview in browser - direct system call approach
-function M.preview()
-	local current_file = vim.fn.expand("%:p")
-	local temp_html = vim.fn.tempname() .. ".html"
-
-	-- Save current buffer
-	vim.cmd("write")
-
-	-- Build the command - exactly like the working CLI command
-	local cmd = string.format('afterwriting --source "%s" --pdf "%s" --overwrite', current_file, temp_html)
-
-	vim.notify("Running: " .. cmd, vim.log.levels.INFO)
-
-	-- Use system() instead of jobstart for direct execution
-	local result = vim.fn.system(cmd)
-
-	if vim.v.shell_error == 0 then
-		-- Open in browser
-		local open_cmd
-		if vim.fn.has("mac") == 1 then
-			open_cmd = "open"
-		elseif vim.fn.has("unix") == 1 then
-			open_cmd = "xdg-open"
-		elseif vim.fn.has("win32") == 1 then
-			open_cmd = "start"
-		end
-
-		if open_cmd then
-			vim.fn.system(string.format('%s "%s"', open_cmd, temp_html))
-			vim.notify("Preview opened in browser", vim.log.levels.INFO)
-		else
-			vim.notify("Could not determine how to open the browser", vim.log.levels.ERROR)
-		end
-	else
-		vim.notify("Preview generation failed: " .. result, vim.log.levels.ERROR)
-	end
-end
-
 return M

@@ -9,7 +9,6 @@ A modern Neovim plugin for the [Fountain](https://fountain.io/) screenplay marku
 - Keyboard shortcuts for common screenwriting tasks
 - Screenplay statistics (scene count, character appearances, etc.)
 - Export to PDF, HTML, and Final Draft formats
-- Preview in browser
 - Compatible with Neovim and LazyVim
 
 ## About Fountain
@@ -138,10 +137,9 @@ require("nvim-fountain").setup({
 - `:FountainStats` - Display screenplay statistics (scene count, character appearances, etc.)
 - `:FountainFormat` - Format the current fountain document
 
-### Export and Preview
+### Export
 
 - `:FountainExportPDF [filename]` - Export to PDF (optional filename)
-- `:FountainPreview` - Preview screenplay in browser
 
 ## Default Keymaps
 
@@ -160,7 +158,7 @@ The `:FountainStats` command provides useful information about your screenplay:
 
 This can help track your screenplay's structure and character balance.
 
-## Export and Preview
+## Export
 
 The export functionality requires [afterwriting](https://github.com/ifrost/afterwriting-labs/blob/master/docs/clients.md) to be installed:
 
@@ -171,8 +169,6 @@ npm install -g afterwriting
 Once installed, you can use the export commands to convert your Fountain screenplay to PDF:
 
 - PDF: `:FountainExportPDF [optional-filename.pdf]`
-
-The preview command (`:FountainPreview`) generates a temporary HTML file and opens it in your default browser.
 
 ## Example Files
 
