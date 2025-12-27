@@ -2,7 +2,7 @@
 -- Save this file to: ~/.config/nvim/lua/plugins/fountain.lua
 
 return {
-	"00msjr/nvim-fountain", -- Replace with your GitHub username
+	"0mykull/nvim-fountain",
 	ft = "fountain", -- Lazy-load only for fountain files
 	dependencies = {
 		-- Optional dependencies

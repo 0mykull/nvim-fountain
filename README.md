@@ -40,7 +40,7 @@ Add to your LazyVim config (e.g., in `lua/plugins/fountain.lua`):
 
 ```lua
 return {
-  "00msjr/nvim-fountain",
+  "0mykull/nvim-fountain",
   ft = "fountain",  -- Lazy-load only for fountain files
   config = function()
     require("nvim-fountain").setup({
@@ -63,7 +63,7 @@ return {
 
 ```lua
 use {
-  "00msjr/nvim-fountain",
+  "0mykull/nvim-fountain",
   ft = "fountain",  -- Lazy-load only for fountain files
   config = function()
     require("nvim-fountain").setup({
@@ -77,7 +77,7 @@ use {
 
 ```vim
 " In your init.vim
-Plug '00msjr/nvim-fountain', {'for': 'fountain'}
+Plug '0mykull/nvim-fountain', {'for': 'fountain'}
 
 " After plug#end(), add:
 augroup fountain_setup
@@ -91,7 +91,7 @@ augroup END
 ```bash
 # Clone the repository
 mkdir -p ~/.local/share/nvim/site/pack/plugins/start/
-git clone https://github.com/00msjr/nvim-fountain.git ~/.local/share/nvim/site/pack/plugins/start/nvim-fountain
+git clone https://github.com/0mykull/nvim-fountain.git ~/.local/share/nvim/site/pack/plugins/start/nvim-fountain
 ```
 
 Then in your init.lua:
