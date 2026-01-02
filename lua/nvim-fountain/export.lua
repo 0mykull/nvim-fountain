@@ -34,7 +34,7 @@ function M.export_pdf(output_path)
 	vim.cmd("write")
 
 	-- Build the command - exactly like the working CLI command
-	local cmd = string.format('afterwriting --source "%s" --pdf "%s"', current_file, output_path)
+	local cmd = { "afterwriting", "--source", current_file, "--pdf", output_path }
 
 	-- Add any additional options
 	if config.pdf.options and config.pdf.options ~= "" then
