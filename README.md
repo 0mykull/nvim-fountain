@@ -1,6 +1,11 @@
 # nvim-fountain
 
 A modern Neovim plugin for the [Fountain](https://fountain.io/) screenplay markup language, forked from Carson Fire's [vim-fountain](http://www.vim.org/scripts/script.php?script_id=3880).
+> [!WARNING]
+> Breaking changes may occur due to a username change from `00msjr` to `0mykull`.
+> Update your config to `0mykull/nvim-fountain`.
+
+> This warning message will be removed with the next version update.
 
 ## Features
 
