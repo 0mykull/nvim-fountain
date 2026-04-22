@@ -38,10 +38,12 @@ function M.export_pdf(output_path)
 
 	-- Add any additional options
 	if config.pdf.options and config.pdf.options ~= "" then
-		cmd = cmd .. " " .. config.pdf.options
+		for option in string.gmatch(config.pdf.options, "%S+") do
+			table.insert(cmd, option)
+		end
 	end
 
-	vim.notify("Running: " .. cmd, vim.log.levels.INFO)
+	vim.notify("Running: " .. table.concat(cmd, " "), vim.log.levels.INFO)
 
 	-- Use system() instead of jobstart for direct execution
 	local result = vim.fn.system(cmd)
