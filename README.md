@@ -122,6 +122,13 @@ require("nvim-fountain").setup({
     -- PDF export options
     pdf = {
       options = "--overwrite",
+
+      -- Override this to export with a different program. It must return
+      -- the command as a list, ready for vim.fn.system(). Defaults to an
+      -- afterwriting invocation; here's an example using screenplain instead:
+      -- command = function(current_file, output_path, options)
+      --   return { "screenplain", current_file, output_path }
+      -- end,
     },
   },
 
@@ -169,6 +176,26 @@ npm install -g afterwriting
 Once installed, you can use the export commands to convert your Fountain screenplay to PDF:
 
 - PDF: `:FountainExportPDF [optional-filename.pdf]`
+
+### Using a different export program
+
+The command used for export is fully overridable, so you can swap in another
+tool (e.g. [screenplain](https://github.com/vilcans/screenplain)) instead of
+afterwriting. Set `export.pdf.command` to a function that receives the source
+file, the output path, and the configured `options` string, and returns the
+command as a list:
+
+```lua
+require("nvim-fountain").setup({
+  export = {
+    pdf = {
+      command = function(current_file, output_path, options)
+        return { "screenplain", current_file, output_path }
+      end,
+    },
+  },
+})
+```
 
 ## Example Files
 

@@ -6,6 +6,20 @@ local default_config = {
 	output_dir = nil,
 	pdf = {
 		options = "--overwrite",
+		-- Builds the command (as a list, for vim.fn.system) used to export.
+		-- Override this to use a different program (e.g. screenplain) with
+		-- its own argument layout.
+		command = function(current_file, output_path, options)
+			local cmd = { "afterwriting", "--source", current_file, "--pdf", output_path }
+
+			if options and options ~= "" then
+				for option in string.gmatch(options, "%S+") do
+					table.insert(cmd, option)
+				end
+			end
+
+			return cmd
+		end,
 	},
 }
 
@@ -33,15 +47,8 @@ function M.export_pdf(output_path)
 	-- Save current buffer
 	vim.cmd("write")
 
-	-- Build the command - exactly like the working CLI command
-	local cmd = { "afterwriting", "--source", current_file, "--pdf", output_path }
-
-	-- Add any additional options
-	if config.pdf.options and config.pdf.options ~= "" then
-		for option in string.gmatch(config.pdf.options, "%S+") do
-			table.insert(cmd, option)
-		end
-	end
+	-- Build the command (overridable via config.export.pdf.command)
+	local cmd = config.pdf.command(current_file, output_path, config.pdf.options)
 
 	vim.notify("Running: " .. table.concat(cmd, " "), vim.log.levels.INFO)
 

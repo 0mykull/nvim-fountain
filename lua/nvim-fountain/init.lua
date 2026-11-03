@@ -20,6 +20,7 @@ M.config = {
 		output_dir = nil,
 		pdf = {
 			options = "--overwrite",
+			-- command = function(current_file, output_path, options) ... end
 		},
 	},
 	-- Statistics settings
