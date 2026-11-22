@@ -93,12 +93,10 @@ end
 
 -- Navigate to next/previous scene heading
 function M.next_section(backwards)
-	-- More comprehensive pattern to match scene headings
-	-- This pattern matches all valid Fountain scene heading formats
-	local pattern = "^\\s*\\([\\.]\\s*\\)\\?\\(INT\\|EXT\\|EST\\|INT\\/EXT\\|I\\/E\\)[\\. ]"
+	local patterns = require("nvim-fountain.patterns")
 	local flags = backwards and "b" or ""
 
-	local line = vim.fn.search(pattern, flags)
+	local line = vim.fn.search(patterns.scene_heading, flags)
 	if line > 0 then
 		vim.api.nvim_win_set_cursor(0, { line, 0 })
 	end
