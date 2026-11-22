@@ -8,7 +8,7 @@
 - 场景标题之间的导航
 - 常用剧本编写任务的键盘快捷键
 - 剧本统计（场景数量、角色出现次数等）
-- 导出为 PDF、HTML 和 Final Draft 格式
+- 导出为 PDF（导出命令可完全自定义）
 - 兼容 Neovim 和 LazyVim
 
 ## 关于 Fountain
@@ -125,8 +125,10 @@ require("nvim-fountain").setup({
     },
   },
 
-  -- 如果可用，启用 treesitter 集成
-  use_treesitter = true,
+  -- 可覆盖任意 Fountain 高亮组
+  highlight_groups = {
+    -- FountainSceneHeading = { link = "WarningMsg" },
+  },
 })
 ```
 
@@ -135,7 +137,7 @@ require("nvim-fountain").setup({
 ### 编辑与导航
 
 - `:FountainStats` - 显示剧本统计信息（场景数、角色出现次数等）
-- `:FountainFormat` - 格式化当前的 fountain 文档
+- `:FountainFormat` - 清除行尾空白并合并多余的空行
 
 ### 导出
 
@@ -187,4 +189,4 @@ nvim ~/my-screenplay.fountain
 
 ## 贡献
 
-欢迎贡献！请参阅 [examples/COMMIT_MESSAGE.md](./examples/COMMIT_MESSAGE.md) 文件了解为现代化此插件而所做的更改摘要。
+欢迎贡献！配置示例请参阅 [examples 目录](./examples/)。

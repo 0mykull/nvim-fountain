@@ -8,7 +8,7 @@ A modern Neovim plugin for the [Fountain](https://fountain.io/) screenplay marku
 - Navigation between scene headings
 - Keyboard shortcuts for common screenwriting tasks
 - Screenplay statistics (scene count, character appearances, etc.)
-- Export to PDF, HTML, and Final Draft formats
+- Export to PDF (with a fully configurable export command)
 - Compatible with Neovim and LazyVim
 
 ## About Fountain
@@ -132,8 +132,10 @@ require("nvim-fountain").setup({
     },
   },
 
-  -- Enable treesitter integration if available
-  use_treesitter = true,
+  -- Override any of the Fountain highlight groups
+  highlight_groups = {
+    -- FountainSceneHeading = { link = "WarningMsg" },
+  },
 })
 ```
 
@@ -142,7 +144,7 @@ require("nvim-fountain").setup({
 ### Editing and Navigation
 
 - `:FountainStats` - Display screenplay statistics (scene count, character appearances, etc.)
-- `:FountainFormat` - Format the current fountain document
+- `:FountainFormat` - Trim trailing whitespace and collapse excess blank lines
 
 ### Export
 
@@ -214,4 +216,4 @@ nvim ~/my-screenplay.fountain
 
 ## Contributing
 
-Contributions are welcome! See the [examples/COMMIT_MESSAGE.md](./examples/COMMIT_MESSAGE.md) file for a summary of the changes made to modernize this plugin.
+Contributions are welcome! See the [examples directory](./examples/) for configuration examples.
