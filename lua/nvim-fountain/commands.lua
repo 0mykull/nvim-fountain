@@ -169,10 +169,45 @@ function M.show_stats()
   vim.bo[buf].modifiable = false
 end
 
--- Format the fountain document
-function M.format_document()
-  -- Implement formatting logic here
-  vim.notify("Formatting fountain document", vim.log.levels.INFO)
+-- Normalise whitespace without changing the structure of the screenplay.
+-- Returns the number of lines that were changed.
+function M.format_document(bufnr)
+  bufnr = bufnr or 0
+  local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+  local formatted = {}
+  local changes = 0
+  local blank_run = 0
+
+  for _, raw in ipairs(lines) do
+    local line = raw:gsub("%s+$", "")
+    if line ~= raw then
+      changes = changes + 1
+    end
+
+    if line == "" then
+      blank_run = blank_run + 1
+      if blank_run <= 1 then
+        table.insert(formatted, line)
+      else
+        changes = changes + 1
+      end
+    else
+      blank_run = 0
+      table.insert(formatted, line)
+    end
+  end
+
+  -- A single trailing blank line is enough.
+  if formatted[#formatted] == "" then
+    table.remove(formatted)
+    changes = changes + 1
+  end
+
+  if changes > 0 then
+    vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, formatted)
+  end
+  vim.notify(string.format("Fountain: formatted %d line(s)", changes), vim.log.levels.INFO)
+  return changes
 end
 
 return M
