@@ -2,7 +2,7 @@
 " Make line uppercase then <cr>
 " =============================
 
-nnoremap <s-cr> gUU<cr>
+nnoremap <buffer> <s-cr> gUU<cr>
 
 " ==========================
 " Move between scene heading
