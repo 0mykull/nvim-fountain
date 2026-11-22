@@ -13,8 +13,6 @@ M.config = {
 		prev_scene = "[[",
 		uppercase_line = "<S-CR>",
 	},
-	-- Enable treesitter integration if available
-	use_treesitter = true,
 	-- Export configuration
 	export = {
 		output_dir = nil,
@@ -22,13 +20,6 @@ M.config = {
 			options = "--overwrite",
 			-- command = function(current_file, output_path, options) ... end
 		},
-	},
-	-- Statistics settings
-	statistics = {
-		count_scenes = true,
-		count_characters = true,
-		count_dialogue = true,
-		count_action = true,
 	},
 }
 
@@ -44,22 +35,19 @@ function M.setup(opts)
 	-- Set up commands
 	M.create_commands()
 
-	-- Set up syntax highlighting if not using treesitter
-	if not M.config.use_treesitter then
-		require("nvim-fountain.syntax").setup()
-	end
+	-- Define the highlight groups (also reapplied on ColorScheme below).
+	require("nvim-fountain.syntax").setup(M.config.highlight_groups)
 end
 
 -- Create plugin autocommands
 function M.create_autocommands()
 	local augroup = vim.api.nvim_create_augroup("nvim_fountain", { clear = true })
 
-	-- File detection
-	vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-		pattern = "*.fountain",
+	-- Colourschemes may clear highlight groups, so restore ours afterwards.
+	vim.api.nvim_create_autocmd("ColorScheme", {
 		group = augroup,
 		callback = function()
-			vim.bo.filetype = "fountain"
+			require("nvim-fountain.syntax").setup(M.config.highlight_groups)
 		end,
 	})
 

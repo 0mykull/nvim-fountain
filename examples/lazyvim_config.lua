@@ -4,10 +4,6 @@
 return {
 	"0mykull/nvim-fountain",
 	ft = "fountain", -- Lazy-load only for fountain files
-	dependencies = {
-		-- Optional dependencies
-		"nvim-treesitter/nvim-treesitter", -- For enhanced syntax highlighting (future feature)
-	},
 	config = function()
 		require("nvim-fountain").setup({
 			-- Keyboard mappings (these are fully implemented)
@@ -31,10 +27,6 @@ return {
 					options = "--overwrite",
 				},
 			},
-
-			-- Enable treesitter integration if available
-			-- Note: Full treesitter grammar for Fountain is planned for future versions
-			use_treesitter = true,
 		})
 	end,
 }

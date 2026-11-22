@@ -26,8 +26,4 @@ return {
       options = "--overwrite",
     },
   },
-  
-  -- Enable treesitter integration if available
-  -- Note: Full treesitter grammar for Fountain is planned for future versions
-  use_treesitter = true,
 }
